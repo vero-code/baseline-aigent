@@ -24,3 +24,6 @@ dist/
 
 # Generated data files
 data/processed_features.json
+
+# Vector database
+chroma/
