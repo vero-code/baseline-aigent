@@ -2,6 +2,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 from langchain_community.vectorstores import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
@@ -18,7 +19,7 @@ embeddings_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings_model)
 
-retriever = db.as_retriever(search_kwargs={"k": 2}) # looking for the 2 most relevant documents.
+retriever = db.as_retriever(search_kwargs={"k": 3}) # looking for the 3 most relevant documents.
 
 # --- 2. ASSEMBLY OF THE RAG-CHAIN ​​---
 template = """You are Baseline AIgent, an expert AI assistant for web developers.
@@ -44,7 +45,18 @@ rag_chain = (
     | StrOutputParser()                                       # Step 4: Get the response in plain text
 )
 
-# --- 3. CHAIN ​​TESTING ---
+# --- 3. CREATING API WITH FASTAPI ---
+app = FastAPI()
+
+# Model for input data
+class QueryRequest(BaseModel):
+    query: str
+
+# Model for output data
+class QueryResponse(BaseModel):
+    response: str
+
+# CHAIN ​​TESTING (for manual start)
 if __name__ == "__main__":
     print("--- Testing RAG Chain ---")
     
@@ -58,7 +70,11 @@ if __name__ == "__main__":
     print("Response:")
     print(response)
 
-app = FastAPI()
+@app.post("/api/ask", response_model=QueryResponse)
+def ask_question(request: QueryRequest):
+    """Accepts the user's question, processes it through the RAG chain, and returns an AI response."""
+    response_text = rag_chain.invoke(request.query)
+    return {"response": response_text}
 
 @app.get("/")
 def read_root():
