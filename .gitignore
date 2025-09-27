@@ -21,3 +21,6 @@ dist/
 
 # Other
 .DS_Store
+
+# Generated data files
+data/processed_features.json
