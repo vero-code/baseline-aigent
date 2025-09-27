@@ -2,6 +2,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from langchain_community.vectorstores import Chroma
@@ -47,6 +48,14 @@ rag_chain = (
 
 # --- 3. CREATING API WITH FASTAPI ---
 app = FastAPI()
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Model for input data
 class QueryRequest(BaseModel):

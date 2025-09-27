@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseline AIgent</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+    <div id="chat-container">
+        <div id="header">
+            <h1>Baseline AIgent 🤖</h1>
+            <p>Your AI assistant for reliable web code</p>
+        </div>
+        <div id="messages-container">
+            <div class="message ai-message">
+                <p>Hi! How can I help you today? Ask me about web technologies, ask me to write or improve code.</p>
+            </div>
+        </div>
+        <form id="chat-form">
+            <textarea id="message-input" placeholder="Ask something..." required></textarea>
+            <button type="submit" id="send-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
