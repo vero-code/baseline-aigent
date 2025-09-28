@@ -7,6 +7,10 @@ An intelligent AI assistant for web developers that generates reliable, cross-br
 
 This project is a submission for the [**Baseline Tooling Hackathon**](https://devpost.com/software/baseline-aigent).
 
+| Project Architecture Diagram | Baseline AIgent UI |
+|--|--|
+| ![Project Architecture Diagram](./docs/project-architecture-diagram.png) | ![Baseline AIgent UI](./docs/baseline-aigent-ui.png) |
+
 ## The Problem: The "AI Trust Gap"
 
 Modern AI assistants are powerful but often unreliable for professional web development. They are trained on a decade of outdated internet content and can generate code that:
